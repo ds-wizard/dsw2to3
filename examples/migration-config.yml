@@ -1,0 +1,19 @@
+# You can re-use configuration of DSW server / docworker if needed
+database:
+  # Mongo
+  host: localhost
+  databaseName: wizard
+  port: 27019
+  authEnabled: false
+  #username: mongoUser
+  #password: mongoPass
+  #=========================
+  # Postgres
+  # --DSN-->        postgresql://username:password@hostname:port/dbname
+  connectionString: postgresql://postgres:postgres@localhost:15432/wizard
+
+s3:
+  url: http://localhost:19000
+  bucket: wizard
+  username: minio
+  password: minioPassword

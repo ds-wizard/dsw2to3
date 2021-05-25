@@ -1,0 +1,17 @@
+# The same as for application.yml of DSW server
+database:
+  # Mongo
+  host: mongo
+  databaseName: wizard
+  port: 27017
+  authEnabled: true
+  username: mongoUser
+  password: mongoPassword
+  # Postgres
+  connectionString: postgresql://postgresUser:postgresPass@postgres:5432/wizard
+
+s3:
+  url: http://minio:9000
+  bucket: wizard
+  username: minio
+  password: minioPassword
