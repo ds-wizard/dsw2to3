@@ -451,7 +451,7 @@ class KMMigration:
             self.branch_previous_package_id,
             self.target_package_id,
             _wrap_json(self.branch_events),
-            self.target_package_events,
+            _wrap_json(self.target_package_events),
             _wrap_json(self.result_events),
             _wrap_json(self.current_knowledge_model),
         )
@@ -1195,7 +1195,7 @@ class WizardEntities:
 
         LOGGER.debug('  - checking references')
         self._check_reference(ActionKey, User, 'user_id', user_ids)
-        self._check_reference(Branch, Package, 'previous_package_id', package_ids)
+        self._check_optional_reference(Branch, Package, 'previous_package_id', package_ids)
         self._check_reference(Branch, User, 'owner_uuid', user_ids)
         self._check_reference(Document, Questionnaire, 'questionnaire_uuid', questionnaire_ids)
         self._check_reference(Document, Template, 'template_id', template_ids)
