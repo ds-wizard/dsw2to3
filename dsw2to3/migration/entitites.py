@@ -108,6 +108,7 @@ class AppConfig:
             'dashboard',
             'look_and_feel',
             'registry',
+            'knowledge_model',
             'questionnaire',
             'template',
             'submission',
@@ -116,6 +117,13 @@ class AppConfig:
         ]
     )
 
+    _DEFAULT_KM = {
+        'public': {
+            'enabled': False,
+            'packages': [],
+        },
+    }
+
     # id: int  # bigint PK
     organization: dict  # json
     authentication: dict  # json
@@ -123,6 +131,7 @@ class AppConfig:
     dashboard: dict  # json
     look_and_feel: dict  # json
     registry: dict  # json
+    knowledge_model: dict  # json
     questionnaire: dict  # json
     template: dict  # json
     submission: dict  # json
@@ -149,21 +158,27 @@ class AppConfig:
             self.updated_at,
         )
 
-    @staticmethod
-    def from_mongo(doc: dict, now: datetime.datetime):
-        return AppConfig(
+    def _migrate(self):
+        self.questionnaire['questionnaireSharing']['anonymousEnabled'] = False
+
+    @classmethod
+    def from_mongo(cls, doc: dict, now: datetime.datetime):
+        app_config = AppConfig(
             organization=doc.get('organization'),
             authentication=doc.get('authentication'),
             privacy_and_support=doc.get('privacyAndSupport'),
             dashboard=doc.get('dashboard'),
             look_and_feel=doc.get('lookAndFeel'),
             registry=doc.get('registry'),
+            knowledge_model=cls._DEFAULT_KM,
             questionnaire=doc.get('questionnaire'),
             template=doc.get('template'),
             submission=doc.get('submission'),
             created_at=doc.get('createdAt', now),
             updated_at=doc.get('updatedAt', now),
         )
+        app_config._migrate()
+        return app_config
 
 
 @dataclasses.dataclass
@@ -413,7 +428,7 @@ class Feedback:
 @dataclasses.dataclass
 class KMMigration:
     COLLECTION = 'kmMigrations'
-    TABLE_NAME = 'km_migration'
+    TABLE_NAME = 'knowledge_model_migration'
     INSERT_QUERY = insert_query(
         table_name=TABLE_NAME,
         fields=[
@@ -653,7 +668,7 @@ class Package:
 @dataclasses.dataclass
 class QuestionnaireMigration:
     COLLECTION = 'questionnaireMigrations'
-    TABLE_NAME = 'qtn_migration'
+    TABLE_NAME = 'questionnaire_migration'
     INSERT_QUERY = insert_query(
         table_name=TABLE_NAME,
         fields=[
