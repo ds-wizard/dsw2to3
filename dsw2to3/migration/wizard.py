@@ -11,26 +11,26 @@ class WizardMigrator(Migrator):
 
     # All tables but in specific order (bcs FK)
     _TABLES_CLEANUP = [
-        'level',
-        'metric',
-        'action_key',
-        'app_config',
-        'book_reference',
-        'branch',
+        Level.TABLE_NAME,
+        Metric.TABLE_NAME,
+        ActionKey.TABLE_NAME,
+        AppConfig.TABLE_NAME,
+        BookReference.TABLE_NAME,
+        Branch.TABLE_NAME,
         'document_queue',
-        'feedback',
-        'km_migration',
-        'qtn_migration',
-        'questionnaire_acl_group',
-        'questionnaire_acl_user',
-        'acl_group',
-        'template_asset',
-        'template_file',
-        'document',
-        'questionnaire',
-        'template',
-        'package',
-        'user_entity',
+        Feedback.TABLE_NAME,
+        KMMigration.TABLE_NAME,
+        QuestionnaireMigration.TABLE_NAME,
+        QuestionnaireACLGroup.TABLE_NAME,
+        QuestionnaireACLUser.TABLE_NAME,
+        ACLGroup.TABLE_NAME,
+        TemplateAsset.TABLE_NAME,
+        TemplateFile.TABLE_NAME,
+        Document.TABLE_NAME,
+        Questionnaire.TABLE_NAME,
+        Template.TABLE_NAME,
+        Package.TABLE_NAME,
+        User.TABLE_NAME,
     ]
 
     _LOAD_ENTITIES_SIMPLE = [
@@ -58,26 +58,26 @@ class WizardMigrator(Migrator):
     ]
 
     _DEFAULT_TABLE_COUNTS = {
-        'acl_group': 0,
-        'action_key': 0,
-        'app_config': 1,  # default app config
-        'book_reference': 0,
-        'branch': 0,
-        'document': 0,
+        ACLGroup.TABLE_NAME: 0,
+        ActionKey.TABLE_NAME: 0,
+        AppConfig.TABLE_NAME: 1,  # default app config
+        BookReference.TABLE_NAME: 0,
+        Branch.TABLE_NAME: 0,
+        Document.TABLE_NAME: 0,
         'document_queue': 0,
-        'feedback': 0,
-        'km_migration': 0,
-        'level': 3,  # default levels (proposal, DMP, project)
-        'metric': 6,  # default metrics (F,A,I,R,G,O)
-        'package': 0,
-        'qtn_migration': 0,
-        'questionnaire': 0,
-        'questionnaire_acl_group': 0,
-        'questionnaire_acl_user': 0,
-        'template': 0,
-        'template_asset': 0,
-        'template_file': 0,
-        'user_entity': 3,  # default users (albert, nikola, isaac)
+        Feedback.TABLE_NAME: 0,
+        KMMigration.TABLE_NAME: 0,
+        Level.TABLE_NAME: 3,  # default levels (proposal, DMP, project)
+        Metric.TABLE_NAME: 6,  # default metrics (F,A,I,R,G,O)
+        Package.TABLE_NAME: 0,
+        QuestionnaireMigration.TABLE_NAME: 0,
+        Questionnaire.TABLE_NAME: 0,
+        QuestionnaireACLGroup.TABLE_NAME: 0,
+        QuestionnaireACLUser.TABLE_NAME: 0,
+        Template.TABLE_NAME: 0,
+        TemplateAsset.TABLE_NAME: 0,
+        TemplateFile.TABLE_NAME: 0,
+        User.TABLE_NAME: 3,  # default users (albert, nikola, isaac)
     }
 
     _INSERT_ARGS = [
