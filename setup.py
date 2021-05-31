@@ -6,7 +6,7 @@ with open('README.md') as f:
 
 setup(
     name='dsw2to3',
-    version='0.1.3',
+    version='0.1.4',
     description='CLI tool to support migration from DSW 2.X to DSW 3.0',
     long_description=long_description,
     long_description_content_type='text/markdown',

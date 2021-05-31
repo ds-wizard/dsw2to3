@@ -151,6 +151,7 @@ class AppConfig:
             _wrap_json(self.dashboard),
             _wrap_json(self.look_and_feel),
             _wrap_json(self.registry),
+            _wrap_json(self.knowledge_model),
             _wrap_json(self.questionnaire),
             _wrap_json(self.template),
             _wrap_json(self.submission),
