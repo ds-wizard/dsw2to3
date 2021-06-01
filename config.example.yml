@@ -1,4 +1,4 @@
-# The same as for application.yml of DSW server
+# The same parts as for DSW configuration file
 database:
   # Mongo
   host: mongo
