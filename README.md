@@ -1,5 +1,10 @@
 # dsw2to3
 
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ds-wizard/dsw2to3)](https://github.com/ds-wizard/dsw2to3/releases)
+[![PyPI](https://img.shields.io/pypi/v/dsw2to3)](https://pypi.org/project/dsw2to3/)
+[![LICENSE](https://img.shields.io/github/license/ds-wizard/dsw2to3)](LICENSE)
+[![Documentation Status](https://readthedocs.org/projects/ds-wizard/badge/?version=latest)](https://docs.ds-wizard.org/en/latest/)
+
 CLI tool to support data migration from DSW 2.14 to DSW 3.0
 
 ## Usage
@@ -50,16 +55,18 @@ $ . env/bin/activate
 - Migration tool initially deletes all objects in configured S3 bucket. If the bucket does not exist, it tries to create a new one.
 - Migration tool migrates data from MongoDB to PostgreSQL in expected way for DSW as well as from MongoDB (GridFS) to S3 storage.
 - You can run the tool with `--dry-run` to check what it will do. During dry run, nothing is deleted, changed, or added (no SQL transactions are committed).
+- It may happen that your MongoDB database contains inconsistent data (violating integrity). With `--fix-integrity` you can fix that by skipping data. You should first check what the data are, and then decide if you will fix it manually in MongoDB or migrate without them.
+- This tool may improve based on feedback, check new version and update using `pip install -U dsw2to3` if needed.
 
 ### Steps
 
 1. Prepare `config.yml` for the migration based on your setup (see `config.example.yml`)
 2. Stop DSW in order to prevent changes in data during the migration
-3. Run `dsw2to3 -c path/to/config.yml --dry-run` to see how it will work with your configuration
-3. Run `dsw2to3 -c path/to/config.yml` (see `dsw2to3 --help` for more options)
-4. After migration, run DSW 3.0 and check the migrated data
-5. Archive data from MongoDB (e.g. using [mongodump](https://docs.mongodb.com/manual/reference/program/mongodump/))
-6. Clean up your deployment (get rid of unused services and configuration files)
+3. Archive data from MongoDB (e.g. using [mongodump](https://docs.mongodb.com/manual/reference/program/mongodump/))
+4. Run `dsw2to3 -c path/to/config.yml --dry-run` to see how it will work with your configuration
+5. Run `dsw2to3 -c path/to/config.yml` (see `dsw2to3 --help` for more options)
+6. After migration, run DSW 3.0 and check the migrated data
+7. Clean up your deployment (get rid of unused services and configuration files)
 
 In case of error during the migration, follow the details from logs. You can run it with `--best-effort` flag that will skip errors (just log them out).
 
@@ -69,5 +76,4 @@ If anything is unclear, or you need help, let us know via issue in this reposito
 
 ## License
 
-This project is licensed under the Apache License v2.0 - see the
-[LICENSE](LICENSE) file for more details.
+This project is licensed under the Apache License v2.0 - see the [LICENSE](LICENSE) file for more details.
