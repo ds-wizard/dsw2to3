@@ -46,7 +46,6 @@ class WizardMigrator(Migrator):
         Package,
         QuestionnaireMigration,
         Questionnaire,
-        Package,
         Template,
         User,
     ]

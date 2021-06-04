@@ -6,7 +6,7 @@ from dsw2to3.config import Config, ConfigParser, MissingConfigurationError
 from dsw2to3.consts import PROG_NAME, VERSION
 from dsw2to3.errors import ERROR_HANDLER
 from dsw2to3.logger import LOGGER
-from dsw2to3.migration import WizardMigrator, MigrationOptions
+from dsw2to3.migration import MigratorFactory, MigrationOptions
 
 LOG_LEVELS = ['CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG']
 DEFAULT_LOG_LEVEL = 'INFO'
@@ -46,9 +46,11 @@ def validate_config(ctx, param, value: TextIO) -> Config:
 @click.option('-l', '--log-level', type=click.Choice(LOG_LEVELS),
               default=DEFAULT_LOG_LEVEL, show_default=True,
               help='Set logging level.')
+@click.option('-r', '--registry', is_flag=True,
+              help='Migrate DSW Registry instead of Wizard.')
 @click.version_option(version=VERSION, prog_name=PROG_NAME)
 def main(config: Config, dry_run: bool, best_effort: bool, skip_pre_check: bool,
-         fix_integrity: bool, log_level: str):
+         fix_integrity: bool, log_level: str, registry: bool):
     """CLI tool to support data migration from DSW 2.14 to DSW 3.0"""
     LOGGER.setLevel(log_level)
     if best_effort:
@@ -58,7 +60,8 @@ def main(config: Config, dry_run: bool, best_effort: bool, skip_pre_check: bool,
         fix_integrity=fix_integrity,
         skip_pre_check=skip_pre_check,
     )
-    migrator = WizardMigrator(
+    migrator = MigratorFactory.create(
+        registry=registry,
         config=config,
         options=options,
     )
