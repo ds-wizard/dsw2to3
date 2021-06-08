@@ -16,6 +16,7 @@ CLI tool to support data migration from DSW 2.14 to DSW 3.0
 * PostgreSQL (with initial DSW 3.0 structure)
 * S3 storage (e.g. [Minio](https://min.io))
 * Python 3.6+ (recommended to use [virtual environment](https://docs.python.org/3/library/venv.html))
+* `postgresql-devel` (`libpq-dev` in Debian/Ubuntu, `libpq-devel` on others)
 
 The machine where you are going to execute the migration tool must have access to MongoDB, PostgreSQL, and S3 storage. See `examples/docker-compose.yml` for reference.
 
@@ -30,6 +31,7 @@ You can install the tool using PyPI:
 ```shell
 $ python -m venv env
 $ . env/bin/activate
+(env) $ pip install wheel
 (env) $ pip install dsw2to3
 ...
 (env) $ dsw2to3 --help
@@ -41,6 +43,7 @@ Or using this repository:
 $ git clone https://github.com/ds-wizard/dsw2to3.git
 $ python -m venv env
 $ . env/bin/activate
+(env) $ pip install wheel
 (env) $ pip install .
 ...
 (env) $ dsw2to3 --help
