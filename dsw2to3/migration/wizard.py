@@ -43,7 +43,6 @@ class WizardMigrator(Migrator):
         KMMigration,
         Level,
         Metric,
-        Package,
         QuestionnaireMigration,
         Questionnaire,
         Package,

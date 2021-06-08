@@ -1,15 +1,17 @@
 import dataclasses
 
+from typing import List
+
 from dsw2to3.config import Config
 
 
-def insert_query(table_name: str, fields: list[str]):
+def insert_query(table_name: str, fields: List[str]):
     field_names = ', '.join(fields)
     field_placeholders = ', '.join('%s' for _ in fields)
     return f'INSERT INTO {table_name} ({field_names}) VALUES ({field_placeholders});'
 
 
-def validate_mongo_doc(document: dict, required_fields: list[str]):
+def validate_mongo_doc(document: dict, required_fields: List[str]):
     missing = [field for field in required_fields
                if field not in document.keys()]
     if len(missing) > 0:

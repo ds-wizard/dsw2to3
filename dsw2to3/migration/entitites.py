@@ -3,7 +3,7 @@ import datetime
 import json
 import uuid
 
-from typing import Optional
+from typing import Optional, List
 
 from dsw2to3.migration.common import insert_query
 from dsw2to3.logger import LOGGER
@@ -86,10 +86,10 @@ class ActionKey:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return ActionKey(
-            uuid=doc.get('uuid'),
-            type=doc.get('type'),
-            hash=doc.get('hash'),
-            user_id=doc.get('userId'),
+            uuid=doc['uuid'],
+            type=doc['type'],
+            hash=doc['hash'],
+            user_id=doc['userId'],
             created_at=doc.get('createdAt', now),
         )
 
@@ -165,16 +165,16 @@ class AppConfig:
     @classmethod
     def from_mongo(cls, doc: dict, now: datetime.datetime):
         app_config = AppConfig(
-            organization=doc.get('organization'),
-            authentication=doc.get('authentication'),
-            privacy_and_support=doc.get('privacyAndSupport'),
-            dashboard=doc.get('dashboard'),
-            look_and_feel=doc.get('lookAndFeel'),
-            registry=doc.get('registry'),
+            organization=doc['organization'],
+            authentication=doc['authentication'],
+            privacy_and_support=doc['privacyAndSupport'],
+            dashboard=doc['dashboard'],
+            look_and_feel=doc['lookAndFeel'],
+            registry=doc['registry'],
             knowledge_model=cls._DEFAULT_KM,
-            questionnaire=doc.get('questionnaire'),
-            template=doc.get('template'),
-            submission=doc.get('submission'),
+            questionnaire=doc['questionnaire'],
+            template=doc['template'],
+            submission=doc['submission'],
             created_at=doc.get('createdAt', now),
             updated_at=doc.get('updatedAt', now),
         )
@@ -219,9 +219,9 @@ class BookReference:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return BookReference(
-            short_uuid=doc.get('shortUuid'),
-            book_chapter=doc.get('bookChapter'),
-            content=doc.get('content'),
+            short_uuid=doc['shortUuid'],
+            book_chapter=doc['bookChapter'],
+            content=doc['content'],
             created_at=doc.get('createdAt', now),
             updated_at=doc.get('updatedAt', now),
         )
@@ -276,13 +276,13 @@ class Branch:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return Branch(
-            uuid=doc.get('uuid'),
-            name=doc.get('name'),
-            km_id=doc.get('kmId'),
-            metamodel_version=doc.get('metamodelVersion'),
-            previous_package_id=doc.get('previousPackageId'),
-            events=doc.get('events'),
-            owner_uuid=doc.get('ownerUuid'),
+            uuid=doc['uuid'],
+            name=doc['name'],
+            km_id=doc['kmId'],
+            metamodel_version=doc['metamodelVersion'],
+            previous_package_id=doc['previousPackageId'],
+            events=doc['events'],
+            owner_uuid=doc['ownerUuid'],
             created_at=doc.get('createdAt', now),
             updated_at=doc.get('updatedAt', now),
         )
@@ -352,17 +352,17 @@ class Document:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return Document(
-            uuid=doc.get('uuid'),
-            name=doc.get('name'),
-            state=doc.get('state'),
-            durability=doc.get('durability'),
-            questionnaire_uuid=doc.get('questionnaireUuid'),
-            questionnaire_event_uuid=doc.get('questionnaireEventUuid'),
-            questionnaire_replies_hash=doc.get('questionnaireRepliesHash'),
-            template_id=doc.get('templateId'),
-            format_uuid=doc.get('formatUuid'),
-            metadata=doc.get('metadata'),
-            creator_uuid=doc.get('creatorUuid'),
+            uuid=doc['uuid'],
+            name=doc['name'],
+            state=doc['state'],
+            durability=doc['durability'],
+            questionnaire_uuid=doc['questionnaireUuid'],
+            questionnaire_event_uuid=doc['questionnaireEventUuid'],
+            questionnaire_replies_hash=doc['questionnaireRepliesHash'],
+            template_id=doc['templateId'],
+            format_uuid=doc['formatUuid'],
+            metadata=doc['metadata'],
+            creator_uuid=doc['creatorUuid'],
             retrieved_at=doc.get('retrievedAt', None),
             finished_at=doc.get('finishedAt', None),
             created_at=doc.get('createdAt', now),
@@ -415,12 +415,12 @@ class Feedback:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return Feedback(
-            uuid=doc.get('uuid'),
-            issue_id=doc.get('issueId'),
-            question_uuid=doc.get('questionUuid'),
-            package_id=doc.get('packageId'),
-            title=doc.get('title'),
-            content=doc.get('content'),
+            uuid=doc['uuid'],
+            issue_id=doc['issueId'],
+            question_uuid=doc['questionUuid'],
+            package_id=doc['packageId'],
+            title=doc['title'],
+            content=doc['content'],
             created_at=doc.get('createdAt', now),
             updated_at=doc.get('updatedAt', now),
         )
@@ -475,15 +475,15 @@ class KMMigration:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return KMMigration(
-            branch_uuid=doc.get('branchUuid'),
-            metamodel_version=doc.get('metamodelVersion'),
-            migration_state=doc.get('migrationState'),
-            branch_previous_package_id=doc.get('branchPreviousPackageId'),
-            target_package_id=doc.get('targetPackageId'),
-            branch_events=doc.get('branchEvents'),
-            target_package_events=doc.get('targetPackageEvents'),
-            result_events=doc.get('resultEvents'),
-            current_knowledge_model=doc.get('currentKnowledgeModel'),
+            branch_uuid=doc['branchUuid'],
+            metamodel_version=doc['metamodelVersion'],
+            migration_state=doc['migrationState'],
+            branch_previous_package_id=doc['branchPreviousPackageId'],
+            target_package_id=doc['targetPackageId'],
+            branch_events=doc['branchEvents'],
+            target_package_events=doc['targetPackageEvents'],
+            result_events=doc['resultEvents'],
+            current_knowledge_model=doc['currentKnowledgeModel'],
         )
 
 
@@ -524,9 +524,9 @@ class Level:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return Level(
-            level=doc.get('level'),
-            title=doc.get('title'),
-            description=doc.get('description'),
+            level=doc['level'],
+            title=doc['title'],
+            description=doc['description'],
             created_at=doc.get('createdAt', now),
             updated_at=doc.get('updatedAt', now),
         )
@@ -575,11 +575,11 @@ class Metric:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return Metric(
-            uuid=doc.get('uuid'),
-            title=doc.get('title'),
-            abbreviation=doc.get('abbreviation'),
-            description=doc.get('description'),
-            reference_json=doc.get('references'),
+            uuid=doc['uuid'],
+            title=doc['title'],
+            abbreviation=doc['abbreviation'],
+            description=doc['description'],
+            reference_json=doc['references'],
             created_at=doc.get('createdAt', now),
             updated_at=doc.get('updatedAt', now),
         )
@@ -649,19 +649,19 @@ class Package:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return Package(
-            id=doc.get('id'),
-            name=doc.get('name'),
-            organization_id=doc.get('organizationId'),
-            km_id=doc.get('kmId'),
-            version=doc.get('version'),
-            metamodel_version=doc.get('metamodelVersion'),
-            description=doc.get('description'),
-            readme=doc.get('readme'),
-            license=doc.get('license'),
-            previous_package_id=doc.get('previousPackageId'),
-            fork_of_package_id=doc.get('forkOfPackageId'),
-            merge_checkpoint_package_id=doc.get('mergeCheckpointPackageId'),
-            events=doc.get('events'),
+            id=doc['id'],
+            name=doc['name'],
+            organization_id=doc['organizationId'],
+            km_id=doc['kmId'],
+            version=doc['version'],
+            metamodel_version=doc['metamodelVersion'],
+            description=doc['description'],
+            readme=doc['readme'],
+            license=doc['license'],
+            previous_package_id=doc['previousPackageId'],
+            fork_of_package_id=doc['forkOfPackageId'],
+            merge_checkpoint_package_id=doc['mergeCheckpointPackageId'],
+            events=doc['events'],
             created_at=doc.get('createdAt', now),
         )
 
@@ -697,8 +697,8 @@ class QuestionnaireMigration:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return QuestionnaireMigration(
-            old_questionnaire_uuid=doc.get('oldQuestionnaireUuid'),
-            new_questionnaire_uuid=doc.get('newQuestionnaireUuid'),
+            old_questionnaire_uuid=doc['oldQuestionnaireUuid'],
+            new_questionnaire_uuid=doc['newQuestionnaireUuid'],
             resolved_question_uuids=doc.get('resolvedQuestionUuids', []),
         )
 
@@ -764,11 +764,11 @@ class Questionnaire:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return Questionnaire(
-            uuid=doc.get('uuid'),
-            name=doc.get('name'),
-            visibility=doc.get('visibility'),
-            sharing=doc.get('sharing'),
-            package_id=doc.get('packageId'),
+            uuid=doc['uuid'],
+            name=doc['name'],
+            visibility=doc['visibility'],
+            sharing=doc['sharing'],
+            package_id=doc['packageId'],
             selected_tag_uuids=doc.get('selectedTagUuids', []),
             template_id=doc.get('templateId', None),
             format_uuid=doc.get('formatUuid', None),
@@ -845,9 +845,9 @@ class QuestionnaireACLUser:
     def from_mongo(doc: dict, permission: dict, now: datetime.datetime):
         return QuestionnaireACLUser(
             uuid=str(uuid.uuid4()),
-            user_uuid=permission.get('member').get('uuid'),
-            perms=permission.get('perms'),
-            questionnaire_uuid=doc.get('uuid'),
+            user_uuid=permission['member']['uuid'],
+            perms=permission['perms'],
+            questionnaire_uuid=doc['uuid'],
         )
 
 
@@ -912,18 +912,18 @@ class Template:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return Template(
-            id=doc.get('id'),
-            name=doc.get('name'),
-            organization_id=doc.get('organizationId'),
-            template_id=doc.get('templateId'),
-            version=doc.get('version'),
-            metamodel_version=doc.get('metamodelVersion'),
-            description=doc.get('description'),
-            readme=doc.get('readme'),
-            license=doc.get('license'),
-            allowed_packages=doc.get('allowedPackages'),
-            recommended_package_id=doc.get('recommendedPackageId'),
-            formats=doc.get('formats'),
+            id=doc['id'],
+            name=doc['name'],
+            organization_id=doc['organizationId'],
+            template_id=doc['templateId'],
+            version=doc['version'],
+            metamodel_version=doc['metamodelVersion'],
+            description=doc['description'],
+            readme=doc['readme'],
+            license=doc['license'],
+            allowed_packages=doc['allowedPackages'],
+            recommended_package_id=doc['recommendedPackageId'],
+            formats=doc['formats'],
             created_at=doc.get('createdAt', now),
         )
 
@@ -962,11 +962,11 @@ class TemplateAsset:
     @staticmethod
     def from_mongo(doc: dict, asset: dict, now: datetime.datetime):
         return TemplateAsset(
-            template_id=doc.get('id'),
+            template_id=doc['id'],
             uuid=str(uuid.uuid4()),
-            file_name=asset.get('fileName'),
-            content_type=asset.get('contentType'),
-            original_uuid=asset.get('uuid'),
+            file_name=asset['fileName'],
+            content_type=asset['contentType'],
+            original_uuid=asset['uuid'],
         )
 
 
@@ -1004,11 +1004,11 @@ class TemplateFile:
     @staticmethod
     def from_mongo(doc: dict, file: dict, now: datetime.datetime):
         return TemplateFile(
-            template_id=doc.get('id'),
+            template_id=doc['id'],
             uuid=str(uuid.uuid4()),
-            file_name=file.get('fileName'),
-            content=file.get('content'),
-            original_uuid=file.get('uuid'),
+            file_name=file['fileName'],
+            content=file['content'],
+            original_uuid=file['uuid'],
         )
 
 
@@ -1082,15 +1082,15 @@ class User:
     @staticmethod
     def from_mongo(doc: dict, now: datetime.datetime):
         return User(
-            uuid=doc.get('uuid'),
-            first_name=doc.get('firstName'),
-            last_name=doc.get('lastName'),
-            email=doc.get('email'),
-            password_hash=doc.get('passwordHash'),
+            uuid=doc['uuid'],
+            first_name=doc['firstName'],
+            last_name=doc['lastName'],
+            email=doc['email'],
+            password_hash=doc['passwordHash'],
             affiliation=doc.get('affiliation', None),
-            sources=doc.get('sources'),
-            role=doc.get('role'),
-            permissions=doc.get('permissions'),
+            sources=doc['sources'],
+            role=doc['role'],
+            permissions=doc['permissions'],
             active=doc.get('active', False),
             submissions_props=doc.get('submissionProps', []),
             image_url=doc.get('imageUrl', None),
@@ -1103,27 +1103,27 @@ class User:
 
 @dataclasses.dataclass
 class WizardEntities:
-    acl_groups: list[ACLGroup] = dataclasses.field(default_factory=list)
-    action_keys: list[ActionKey] = dataclasses.field(default_factory=list)
-    app_configs: list[AppConfig] = dataclasses.field(default_factory=list)
-    book_references: list[BookReference] = dataclasses.field(default_factory=list)
-    branches: list[Branch] = dataclasses.field(default_factory=list)
-    documents: list[Document] = dataclasses.field(default_factory=list)
-    feedbacks: list[Feedback] = dataclasses.field(default_factory=list)
-    km_migrations: list[KMMigration] = dataclasses.field(default_factory=list)
-    levels: list[Level] = dataclasses.field(default_factory=list)
-    metrics: list[Metric] = dataclasses.field(default_factory=list)
-    packages: list[Package] = dataclasses.field(default_factory=list)
-    questionnaire_migrations: list[QuestionnaireMigration] = dataclasses.field(default_factory=list)
-    questionnaires: list[Questionnaire] = dataclasses.field(default_factory=list)
-    questionnaire_acl_groups: list[QuestionnaireACLGroup] = dataclasses.field(default_factory=list)
-    questionnaire_acl_users: list[QuestionnaireACLUser] = dataclasses.field(default_factory=list)
-    templates: list[Template] = dataclasses.field(default_factory=list)
-    template_assets: list[TemplateAsset] = dataclasses.field(default_factory=list)
-    template_files: list[TemplateFile] = dataclasses.field(default_factory=list)
-    users: list[User] = dataclasses.field(default_factory=list)
+    acl_groups: List[ACLGroup] = dataclasses.field(default_factory=list)
+    action_keys: List[ActionKey] = dataclasses.field(default_factory=list)
+    app_configs: List[AppConfig] = dataclasses.field(default_factory=list)
+    book_references: List[BookReference] = dataclasses.field(default_factory=list)
+    branches: List[Branch] = dataclasses.field(default_factory=list)
+    documents: List[Document] = dataclasses.field(default_factory=list)
+    feedbacks: List[Feedback] = dataclasses.field(default_factory=list)
+    km_migrations: List[KMMigration] = dataclasses.field(default_factory=list)
+    levels: List[Level] = dataclasses.field(default_factory=list)
+    metrics: List[Metric] = dataclasses.field(default_factory=list)
+    packages: List[Package] = dataclasses.field(default_factory=list)
+    questionnaire_migrations: List[QuestionnaireMigration] = dataclasses.field(default_factory=list)
+    questionnaires: List[Questionnaire] = dataclasses.field(default_factory=list)
+    questionnaire_acl_groups: List[QuestionnaireACLGroup] = dataclasses.field(default_factory=list)
+    questionnaire_acl_users: List[QuestionnaireACLUser] = dataclasses.field(default_factory=list)
+    templates: List[Template] = dataclasses.field(default_factory=list)
+    template_assets: List[TemplateAsset] = dataclasses.field(default_factory=list)
+    template_files: List[TemplateFile] = dataclasses.field(default_factory=list)
+    users: List[User] = dataclasses.field(default_factory=list)
 
-    _result: list[str] = dataclasses.field(default_factory=list)
+    _result: List[str] = dataclasses.field(default_factory=list)
 
     LIST_ENTITY = {
         'acl_groups': ACLGroup,
@@ -1150,10 +1150,10 @@ class WizardEntities:
     ENTITY_LIST = {e.__name__: lst for lst, e in LIST_ENTITY.items()}
 
     def list_by_entity(self, entity) -> list:
-        return getattr(self, self.ENTITY_LIST.get(entity.__name__))
+        return getattr(self, self.ENTITY_LIST.get(entity.__name__, 'unknown'))
 
     def set_list(self, entity, lst: list):
-        return setattr(self, self.ENTITY_LIST.get(entity.__name__), lst)
+        return setattr(self, self.ENTITY_LIST.get(entity.__name__, 'unknown'), lst)
 
     def valid_entries(self, entity):
         return (x for x in self.list_by_entity(entity) if x.integrity_ok is not False)
@@ -1236,7 +1236,7 @@ class WizardEntities:
         LOGGER.debug(f'  - {len(self._result) - prev_len} new inconsistencies found')
         return prev_len != len(self._result)
 
-    def check_integrity(self) -> list[str]:
+    def check_integrity(self) -> List[str]:
         self._result.clear()
         # Uniqueness (PKs, UNIQUE)
         LOGGER.info('- checking ID uniqueness')

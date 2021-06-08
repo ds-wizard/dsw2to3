@@ -1,6 +1,6 @@
 import contextlib
-import minio
-import minio.datatypes
+import minio  # type: ignore
+import minio.datatypes  # type: ignore
 import tempfile
 import tenacity
 
