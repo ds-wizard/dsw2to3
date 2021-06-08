@@ -1,6 +1,6 @@
 import datetime
-import gridfs
-import pymongo
+import gridfs  # type: ignore
+import pymongo  # type: ignore
 import tenacity
 
 from typing import Optional

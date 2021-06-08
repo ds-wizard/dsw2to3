@@ -1,5 +1,5 @@
-import psycopg2
-import psycopg2.extensions
+import psycopg2  # type: ignore
+import psycopg2.extensions  # type: ignore
 import tenacity
 
 from dsw2to3.config import PostgresConfig

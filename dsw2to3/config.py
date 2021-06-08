@@ -1,13 +1,13 @@
 import dataclasses
 import yaml
 
-from psycopg2.extensions import parse_dsn
-from typing import Optional
+from psycopg2.extensions import parse_dsn  # type: ignore
+from typing import Optional, List
 
 
 class MissingConfigurationError(Exception):
 
-    def __init__(self, missing: list[str]):
+    def __init__(self, missing: List[str]):
         self.missing = missing
 
 
