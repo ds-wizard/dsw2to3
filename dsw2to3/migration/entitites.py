@@ -1230,6 +1230,8 @@ class WizardEntities:
         self._check_reference(QuestionnaireACLGroup, Questionnaire, 'questionnaire_uuid', questionnaire_ids)
         self._check_reference(QuestionnaireACLUser, Questionnaire, 'questionnaire_uuid', questionnaire_ids)
         self._check_reference(QuestionnaireACLUser, User, 'user_uuid', user_ids)
+        self._check_reference(QuestionnaireMigration, Questionnaire, 'old_questionnaire_uuid', questionnaire_ids)
+        self._check_reference(QuestionnaireMigration, Questionnaire, 'new_questionnaire_uuid', questionnaire_ids)
         self._check_reference(TemplateAsset, Template, 'template_id', template_ids)
         self._check_reference(TemplateFile, Template, 'template_id', template_ids)
 
